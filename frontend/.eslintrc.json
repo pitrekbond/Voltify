@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "react/jsx-uses-vars": "error", // Catches unused JSX variables
+    "no-undef": "error" // Catches undefined variables (critical for your case)
+  }
+}

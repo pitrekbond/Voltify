@@ -1,0 +1,206 @@
+.form-control:focus {
+  outline: 2px solid grey;
+  box-shadow: none;
+}
+
+.gray-focus {
+  border-width: 2px !important;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.gray-focus:focus {
+  border-color: transparent !important;
+  box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25) !important;
+  outline: none !important;
+}
+
+.listgroup-border {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.checkout-steps {
+  position: relative;
+  padding-top: 20px;
+}
+
+.checkout-steps .nav-item {
+  position: relative;
+  padding: 0 15px; /* Reduced padding for mobile */
+}
+
+@media (min-width: 576px) {
+  .checkout-steps .nav-item {
+    padding: 0 30px; /* Original padding for larger screens */
+  }
+}
+
+.checkout-steps .nav-item::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px; /* Slightly smaller circles on mobile */
+  height: 16px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  z-index: 2;
+}
+
+@media (min-width: 576px) {
+  .checkout-steps .nav-item::before {
+    width: 20px; /* Original size for larger screens */
+    height: 20px;
+  }
+}
+
+/* Fix for active states - Make all previous and current steps green */
+.checkout-steps .nav-item.active::before,
+.checkout-steps .nav-item.active ~ .nav-item.active::before {
+  background-color: #28a745;
+}
+
+/* Fix for previous steps - ensure they stay green after passing them */
+.checkout-steps
+  .nav-item:nth-child(1).active
+  ~ .nav-item:nth-child(2).active
+  ~ .nav-item:nth-child(1)::before,
+.checkout-steps
+  .nav-item:nth-child(2).active
+  ~ .nav-item:nth-child(3).active
+  ~ .nav-item:nth-child(2)::before,
+.checkout-steps
+  .nav-item:nth-child(3).active
+  ~ .nav-item:nth-child(4).active
+  ~ .nav-item:nth-child(3)::before {
+  background-color: #28a745;
+}
+
+/* Fix for previous steps in step 3 */
+.checkout-steps
+  .nav-item:nth-child(1).active
+  ~ .nav-item:nth-child(3).active
+  ~ .nav-item:nth-child(1)::before,
+.checkout-steps
+  .nav-item:nth-child(2).active
+  ~ .nav-item:nth-child(3).active
+  ~ .nav-item:nth-child(2)::before {
+  background-color: #28a745;
+}
+
+/* Fix for previous steps in step 4 */
+.checkout-steps
+  .nav-item:nth-child(1).active
+  ~ .nav-item:nth-child(4).active
+  ~ .nav-item:nth-child(1)::before,
+.checkout-steps
+  .nav-item:nth-child(2).active
+  ~ .nav-item:nth-child(4).active
+  ~ .nav-item:nth-child(2)::before,
+.checkout-steps
+  .nav-item:nth-child(3).active
+  ~ .nav-item:nth-child(4).active
+  ~ .nav-item:nth-child(3)::before {
+  background-color: #28a745;
+}
+
+.checkout-steps .nav-link.disabled {
+  color: #6c757d !important;
+}
+
+.checkout-steps .nav-link:not(.disabled) {
+  color: #28a745 !important;
+}
+
+.checkout-steps .step-link {
+  font-size: 12px; /* Smaller font on mobile */
+  text-align: center;
+  white-space: nowrap;
+  padding: 0;
+}
+
+@media (min-width: 576px) {
+  .checkout-steps .step-link {
+    font-size: 14px; /* Original size for larger screens */
+  }
+}
+
+/* Fix the connecting lines between dots */
+.checkout-steps .nav-item:first-child::after,
+.checkout-steps .nav-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%; /* Start at center of current dot */
+  width: 100%; /* Full width between centers */
+  height: 2px;
+  background-color: #6c757d;
+  z-index: 1;
+}
+
+/* Fix the active state for lines */
+.checkout-steps .nav-item.active::after {
+  background-color: #28a745;
+}
+
+/* Only keep the right half of the line */
+.checkout-steps .nav-item::after {
+  left: 50%;
+  width: 100%;
+}
+
+/* Fix for very small screens */
+@media (max-width: 360px) {
+  .checkout-steps {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .checkout-steps .nav-item {
+    margin-bottom: 25px;
+    padding: 0 10px;
+  }
+
+  /* Adjust or remove connecting lines when stacked */
+  .checkout-steps .nav-item:first-child::after,
+  .checkout-steps .nav-item:not(:last-child)::after {
+    display: none;
+  }
+}
+
+.custom-pagination .page-item .page-link {
+  color: black;
+  background-color: white;
+  border-color: #ddd;
+}
+
+.custom-pagination .page-item.active .page-link {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
+.custom-pagination .page-item:hover .page-link {
+  color: black;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.custom-pagination .page-item.active:hover .page-link {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
+.carousel-caption-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 25px;
+  text-align: center;
+}
