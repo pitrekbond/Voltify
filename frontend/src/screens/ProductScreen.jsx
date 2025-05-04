@@ -180,7 +180,8 @@ export default function ProductScreen() {
                   <ListGroup.Item key={review._id}>
                     <strong>
                       {review.name}
-                      {review.user.toString() === userInfo._id.toString() &&
+                      {userInfo &&
+                        review.user.toString() === userInfo._id.toString() &&
                         " (You)"}
                     </strong>
                     <Rating value={review.rating} />
@@ -189,58 +190,62 @@ export default function ProductScreen() {
                   </ListGroup.Item>
                 ))}
 
-                {!product.reviews.find(
-                  (review) => review.user.toString() === userInfo._id.toString()
-                ) && (
-                  <ListGroup.Item className="mt-4">
-                    <h2>Write your review</h2>
-                    {isCreatingReview && <Loader />}
-                    {userInfo ? (
-                      <Form onSubmit={addReviewHandler}>
-                        <Form.Group controlId="rating" className="my-2">
-                          <Form.Label>Rating</Form.Label>
-                          <Form.Control
-                            as="select"
-                            value={rating}
-                            onChange={(e) => setRating(Number(e.target.value))}
-                            className="gray-focus"
+                {userInfo &&
+                  !product.reviews.find(
+                    (review) =>
+                      review.user.toString() === userInfo._id.toString()
+                  ) && (
+                    <ListGroup.Item className="mt-4">
+                      <h2>Write your review</h2>
+                      {isCreatingReview && <Loader />}
+                      {userInfo ? (
+                        <Form onSubmit={addReviewHandler}>
+                          <Form.Group controlId="rating" className="my-2">
+                            <Form.Label>Rating</Form.Label>
+                            <Form.Control
+                              as="select"
+                              value={rating}
+                              onChange={(e) =>
+                                setRating(Number(e.target.value))
+                              }
+                              className="gray-focus"
+                            >
+                              <option value="">Select...</option>
+                              <option value="1">1 - Poor</option>
+                              <option value="2">2 - Fair</option>
+                              <option value="3">3 - Good</option>
+                              <option value="4">4 - Very Good</option>
+                              <option value="5">5 - Excellent</option>
+                            </Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="comment" className="my-2">
+                            <Form.Label>Comment</Form.Label>
+                            <Form.Control
+                              as="textarea"
+                              row="3"
+                              value={comment}
+                              onChange={(e) => setComment(e.target.value)}
+                              className="gray-focus"
+                            ></Form.Control>
+                          </Form.Group>
+                          <Button
+                            disabled={isCreatingReview}
+                            type="submit"
+                            variant="dark"
+                            className="py-2 px-2"
+                            style={{ fontSize: "1.2rem" }}
                           >
-                            <option value="">Select...</option>
-                            <option value="1">1 - Poor</option>
-                            <option value="2">2 - Fair</option>
-                            <option value="3">3 - Good</option>
-                            <option value="4">4 - Very Good</option>
-                            <option value="5">5 - Excellent</option>
-                          </Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="comment" className="my-2">
-                          <Form.Label>Comment</Form.Label>
-                          <Form.Control
-                            as="textarea"
-                            row="3"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className="gray-focus"
-                          ></Form.Control>
-                        </Form.Group>
-                        <Button
-                          disabled={isCreatingReview}
-                          type="submit"
-                          variant="dark"
-                          className="py-2 px-2"
-                          style={{ fontSize: "1.2rem" }}
-                        >
-                          Submit
-                        </Button>
-                      </Form>
-                    ) : (
-                      <Message>
-                        Please <Link to="/login">sign in</Link> to write a
-                        review
-                      </Message>
-                    )}
-                  </ListGroup.Item>
-                )}
+                            Submit
+                          </Button>
+                        </Form>
+                      ) : (
+                        <Message>
+                          Please <Link to="/login">sign in</Link> to write a
+                          review
+                        </Message>
+                      )}
+                    </ListGroup.Item>
+                  )}
               </ListGroup>
             </Col>
 
